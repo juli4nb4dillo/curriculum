@@ -45,7 +45,7 @@ h2 {
 .FullStack {
     display: grid;
     min-width: 200px;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
     
 }
 
@@ -127,6 +127,29 @@ ul.Bullet > li {
     margin-left: 0;
     margin-right: 0.2em;
 }
+
+.ExperienceContent {
+    /*TODO two columns*/
+    /* display: grid;    
+    grid-template-columns: minmax(10em, 45%) 1fr; */
+}
+
+.ExperienceContent > div {
+    /* border: 1px solid red; */
+}
+
+.ExperienceStack {
+
+}
+
+.ExperienceStack > div {
+    display: flex;
+    background-color: #222;
+    border-radius: 1em;
+    margin: 5px;
+}
+
+
 
 .blinking {
   animation: blinker 1s linear infinite;

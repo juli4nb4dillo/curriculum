@@ -1,12 +1,12 @@
 import './App.css';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faPaintBrush, faGears, faDatabase, faTerminal, faRocket, faDownload, faSun, faMoon  } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import experience from './experience.json';
+import { faMagnifyingGlass, faInfinity, faPaintBrush, faGears, faDatabase, faTerminal, faRocket, faDownload, faSun, faMoon, faHammer, faPaintRoller, faCode, faBug, faGem, faToolbox, faSnowflake } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faLinkedin, faCss3Alt, faPython, faJs, faJava, faLinux, faReact, faGitAlt, faDocker, faPostgresql } from '@fortawesome/free-brands-svg-icons';
 import skills from './skills.json';
 import awards from './awards.json';
-
+import { Experience } from './Experience';
+import { Card } from './Card';
 
 
 
@@ -31,7 +31,7 @@ const Header = () => {
         <div className="topRightButtons">
             <FontAwesomeIcon icon={faDownload} />
             <FontAwesomeIcon icon={faSun} />
-            <FontAwesomeIcon icon={faMoon   } />
+            <FontAwesomeIcon icon={faMoon} />
         </div>
     </div>
 }
@@ -56,49 +56,61 @@ const FullStack = () => {
         <div><FontAwesomeIcon icon={faPaintBrush} /> Front End</div>
         <div><FontAwesomeIcon icon={faGears} /> Back End</div>
         <div><FontAwesomeIcon icon={faDatabase} /> Databases</div>
+        <div><FontAwesomeIcon icon={faInfinity} /> DevOps</div>
     </div>
 }
 
 const SearchBar = () => {
-    const [searchText, setSearchText] = useState('');
+    // TODO
+    // const [searchText, setSearchText] = useState('');
 
-    const onTextChange = (event) => {
-        setSearchText(event.target.value);
-    }
-    return <div className="SearchBar">
-        <FontAwesomeIcon icon={faTerminal} className="terminalIcon blinking" />
-        <input type="text" value={searchText} onChange={onTextChange} placeholder="Search" />
-        <FontAwesomeIcon icon={faMagnifyingGlass} className="searchIcon" />
-    </div>
+    // const onTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //     setSearchText(event.target.value);
+    // }
+
+    // return <div className="SearchBar">
+    //     <FontAwesomeIcon icon={faTerminal} className="terminalIcon blinking" />
+    //     <input type="text" value={searchText} onChange={onTextChange} placeholder="Search" />
+    //     <FontAwesomeIcon icon={faMagnifyingGlass} className="searchIcon" />
+    // </div>
+    return '';
 }
 
 const Results = () => {
-    return <div><h2>Results</h2></div>
+    return '';
 }
 
-
+const iconMap: Record<string, any> = {
+    'faHammer': faHammer,
+    'faCss3Alt': faCss3Alt,
+    'faReact': faReact,
+    'faPaintRoller': faPaintRoller,
+    'faCode': faCode,
+    'faBug': faBug,
+    'faPython': faPython,
+    'faJs': faJs,
+    'faJava': faJava,
+    'faGem': faGem,
+    'faDatabase': faDatabase,
+    'faToolbox': faToolbox,
+    'faLinux': faLinux,
+    'faTerminal': faTerminal,
+    'faSnowflake': faSnowflake,
+    'faPostgresql': faPostgresql,
+    'faDocker': faDocker,
+    'faGitAlt': faGitAlt,
+};
 
 const Skills = () => {
     return <div>
         <h2>Skills</h2>
-        {skills.map((obj, idx) =>
+        {skills.map((obj) =>
             <Card key={obj.skill} title={obj.skill}>
                 <ul className="Bullet">
-                    {obj.items.map((item) =>
-                        <li key={item.name}>{item.name} <FontAwesomeIcon icon={item.icon} /></li>)}
+                    {obj.items.map((item) => {
+                        return <li key={item.name}>{item.name} {item.icon ? <FontAwesomeIcon icon={iconMap[item.icon]} /> : ''}</li>
+                    })}
                 </ul>
-            </Card>)}
-    </div>;
-}
-
-const Experience = () => {
-    return <div>
-        <h2>Experience</h2>
-        {experience.map((obj, idx) =>
-            <Card key={obj.company} title={`${obj.company}  ${obj.from}-${obj.until}`}>
-                <p>{obj.company}</p>
-                <p>Accomplishments</p>
-                {obj.accomplishments.map((obj) => <p>{obj}</p>)}
             </Card>)}
     </div>;
 }
@@ -110,11 +122,3 @@ const Awards = () => {
     </Card>
 }
 
-const Card = ({ title, children }) => {
-    return <div className="Card">
-        <div className="CardHeader">{title}</div>
-        <div className="CardBody">
-            {children}
-        </div>
-    </div>
-}

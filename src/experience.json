@@ -4,16 +4,18 @@
     "until": "Now",
     "company": "Numat, Inc.",
     "webpage": "https://numat.com/",
-    "division": "IT",
+    "division": "Data Engineering",
     "city": "Skokie, IL",
     "position": "Senior Software Engineer",
     "references": ["Paul Boone paul.boone@numat.com"],
-    "keywords": ["web developer", "fullstack", "Django", "Python", "Azure Pipelines", "REST API"],
+    "keywords": ["web developer", "fullstack", "Django", "Python", "Docker", "REST API", "Data Engineering"],
     "tasks": [
       "Maintain software for chemical research and processing",
       "REST API integration of R&D solutions"
     ],
-    "accomplishments": ["Integration of E-Lab Notebook, Chemical Inventory and Laboratory systems.",
+    "accomplishments": [
+      "Implementation of DBT dataworkflows and Snowflake Data-Lake",
+      "Integration of E-Lab Notebook, Chemical Inventory and Laboratory systems.",
       "Implementation of a Company Portal for internal use.",
       "Refactoring and testing of legacy code."],
     "tech":{
@@ -33,7 +35,7 @@
     "position": "Applications Developer & Systems Analyst",
     "references": ["Erik Gottschalk egottschalk@fnal.gov"],
     "keywords": ["web developer", "fullstack", "React", "Node.js", "GraphQL"],
-    "tasks": ["Do use case analysis for accelerator controls modernization.",
+    "tasks": ["Use case analysis for accelerator controls modernization.",
       "Develop software for accelerator controls."],
     "accomplishments": ["Use cases and functional requirements for new control system.",
       "Refurbish of physical key inventory tracking tool."],
