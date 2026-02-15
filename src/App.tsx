@@ -1,157 +1,120 @@
-import React from 'react';
-import './index.css';
-//import './animation.css';
-import Experience from './Experience';
-import Education from './Education';
-import Skills from './Skills';
-import Awards from './Awards';
-import { Col, Container, Row } from 'react-bootstrap';
-import ThemeToggle from './ThemeToggle';
+import './App.css';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAward, faBuildingColumns, faLaptopCode, faUserGraduate } from '@fortawesome/free-solid-svg-icons';
-import { Routes, Route, Outlet, Link, useLocation } from "react-router-dom";
-import { AnimatePresence } from 'framer-motion';
+import { faMagnifyingGlass, faPaintBrush, faGears, faDatabase, faTerminal, faRocket, faDownload, faSun, faMoon  } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import experience from './experience.json';
+import skills from './skills.json';
+import awards from './awards.json';
 
-interface AppState {
-  // to know which component to display
-  content: string | null
+
+
+
+export default function App() {
+    return (<main>
+        <Header />
+        <div className="topContainer">
+            <Name></Name>
+            <FullStack></FullStack>
+        </div>
+        <SearchBar />
+        <Results />
+        <Skills />
+        <Experience />
+        <Awards />
+
+    </main>);
 }
 
-/**
- * Main component for the app
- */
-class App extends React.Component<unknown, AppState> {
-  constructor(props: unknown) {
-    super(props);
-    this.state = { content: null };
-  }
-
-  /**
-   * When a menu option is clicked
-   */
-  handleMenuOptionClick = (opt: string) => {
-    const { content } = this.state;
-    this.setState({ content: content === opt ? null : opt });
-  };
-
-  /**
-   * Render the app
-   * */
-  render() {
-    return (
-      <Container className="App">
-        <PageHead />
-        <Container className="position-sticky sticky-top menu">
-          <Row className="pt-3 text-center">
-            <Col xs={6} xl={3} className="pb-3">
-              <Link className="btn btn-secondary w-100" to="/skills">
-                <FontAwesomeIcon icon={faLaptopCode} />&nbsp;<span>Skills</span>
-              </Link>
-            </Col>
-            <Col xs={6} xl={3} className="pb-3">
-              <Link className="btn btn-secondary w-100" to="/experience">
-                <FontAwesomeIcon icon={faBuildingColumns} />&nbsp;<span>Experience</span>
-              </Link>
-            </Col>
-            <Col xs={6} xl={3} className="pb-3">
-              <Link className="btn btn-secondary w-100" to="/education">
-                <FontAwesomeIcon icon={faUserGraduate} />&nbsp;<span>Education</span>
-              </Link>
-            </Col>
-            <Col xs={6} xl={3} className="pb-3">
-              <Link className="btn btn-secondary w-100" to="/awards">
-                <FontAwesomeIcon icon={faAward} />&nbsp;<span>Awards</span>
-              </Link>
-            </Col>
-          </Row>
-        </Container>
-        <Row className="pt-2"><Outlet /></Row>
-        <LocationProvider>
-          <AnimatedRoutes />
-        </LocationProvider>
-        <Row className="Footer p-5">
-          <Footer />
-        </Row>
-      </Container>
-    );
-  }
-}
-
-/**
- * Header component
- */
-function PageHead() {
-  return (
-    <Row className='pt-3 px-3 pb-0 text-center'>
-      <Col xs={10} lg={9} className='text-start'>
-        <h1>Julian Badillo</h1>
-        <h2>Software Engineer</h2>
-        <p>A successful day: when someone is grateful I&lsquo;m working by their side.</p>
-      </Col>
-      <Col xs={2} lg={3} className='text-end'>
-        <img className="logo-dark w-100 pt-4" src="jblight.svg" alt="jb" />
-      </Col>
-      <div className='position-absolute top-0 end-0 m-2 m-md-4'>
-        <ThemeToggle />
-      </div>
-    </Row>
-  );
-}
-
-/**
- * Wrapper for the location provider
- * @param param0 
- * @returns 
- */
-function LocationProvider({ children }: { children: React.ReactNode }) {
-  return (
-    <AnimatePresence>
-      {children}
-    </AnimatePresence>
-  )
-}
-
-/**
- * Routes with animation - explicitly extracted so we can use location.
- * @returns 
- */
-function AnimatedRoutes() {
-  const location = useLocation();
-  return (
-    <Routes location={location} key={location.key}>
-      <Route path="skills" element={<Skills />} />
-      <Route path="experience" element={<Experience />} />
-      <Route path="education" element={<Education />} />
-      <Route path="awards" element={<Awards />} />
-    </Routes>
-  );
-}
-
-/**
- * Footer component
- */
-function Footer() {
-  return (
-    <div className='d-flex justify-content-center fs-4 text-secondary'>
-      <div>
-        <a className='text-secondary' href="https://www.linkedin.com/in/juli4nb4dillo/" title='LinkedIn' target='_blank' rel='noreferrer'>
-          <FontAwesomeIcon icon={faLinkedin} />
-        </a>
-      </div>
-      <div>
-        <a className='text-secondary' href="https://github.com/julianbadillo" title='Personal GitHub' target='_blank' rel='noreferrer'>
-          <FontAwesomeIcon icon={faGithub} />
-        </a>
-      </div>
-      <div>
-        <a className='text-secondary' href="https://github.com/juli4nb4dillo" title='Corporate GitHub' target='_blank' rel='noreferrer'>
-          <FontAwesomeIcon icon={faGithub} />
-        </a>
-      </div>
+const Header = () => {
+    return <div className="Header">
+        <div className="topRightButtons">
+            <FontAwesomeIcon icon={faDownload} />
+            <FontAwesomeIcon icon={faSun} />
+            <FontAwesomeIcon icon={faMoon   } />
+        </div>
     </div>
-  );
+}
+
+const Name = () => {
+    return <div>
+        <div className="Name">Julian Badillo</div>
+        <div className="Title">
+            <FontAwesomeIcon icon={faRocket} />
+            {' '}
+            Fullstack Engineer
+            {' '}
+            <a href="https://github.com/julianbadillo/" target="_blank"><FontAwesomeIcon icon={faGithub} /></a>
+            <a href="https://github.com/juli4nb4dillo/" target="_blank"><FontAwesomeIcon icon={faGithub} /></a>
+            <a href="https://www.linkedin.com/in/juli4nb4dillo/" target="_blank"><FontAwesomeIcon icon={faLinkedin} /></a>
+        </div>
+    </div>;
+}
+
+const FullStack = () => {
+    return <div className="FullStack">
+        <div><FontAwesomeIcon icon={faPaintBrush} /> Front End</div>
+        <div><FontAwesomeIcon icon={faGears} /> Back End</div>
+        <div><FontAwesomeIcon icon={faDatabase} /> Databases</div>
+    </div>
+}
+
+const SearchBar = () => {
+    const [searchText, setSearchText] = useState('');
+
+    const onTextChange = (event) => {
+        setSearchText(event.target.value);
+    }
+    return <div className="SearchBar">
+        <FontAwesomeIcon icon={faTerminal} className="terminalIcon blinking" />
+        <input type="text" value={searchText} onChange={onTextChange} placeholder="Search" />
+        <FontAwesomeIcon icon={faMagnifyingGlass} className="searchIcon" />
+    </div>
+}
+
+const Results = () => {
+    return <div><h2>Results</h2></div>
 }
 
 
-export default App;
+
+const Skills = () => {
+    return <div>
+        <h2>Skills</h2>
+        {skills.map((obj, idx) =>
+            <Card key={obj.skill} title={obj.skill}>
+                <ul className="Bullet">
+                    {obj.items.map((item) =>
+                        <li key={item.name}>{item.name} <FontAwesomeIcon icon={item.icon} /></li>)}
+                </ul>
+            </Card>)}
+    </div>;
+}
+
+const Experience = () => {
+    return <div>
+        <h2>Experience</h2>
+        {experience.map((obj, idx) =>
+            <Card key={obj.company} title={`${obj.company}  ${obj.from}-${obj.until}`}>
+                <p>{obj.company}</p>
+                <p>Accomplishments</p>
+                {obj.accomplishments.map((obj) => <p>{obj}</p>)}
+            </Card>)}
+    </div>;
+}
+
+
+const Awards = () => {
+    return <Card title="Awards">
+        {awards.map((obj, idx) => <p key={obj.id}>{obj.year}: {obj.name}</p>)}
+    </Card>
+}
+
+const Card = ({ title, children }) => {
+    return <div className="Card">
+        <div className="CardHeader">{title}</div>
+        <div className="CardBody">
+            {children}
+        </div>
+    </div>
+}
